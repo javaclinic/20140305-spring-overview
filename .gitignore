@@ -1,15 +1,15 @@
 
-*target*
+bin/
+target/
+*~
+
 *.class
 *.jar
 *.war
 *.ear
 
-
 .metadata 
-bin/**
-tmp/**
-tmp/**/* 
+tmp/
 *.tmp
 *.swp
 *.bak

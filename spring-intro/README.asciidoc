@@ -1,0 +1,7 @@
+== spring-intro
+
+* This projects facilitates introduction to Spring.
+* There are three examples that you can run:
+** `mvn exec:java -Dexec.mainClass="examples.run.PojoApplicationNoSpring"`
+** `mvn exec:java -Dexec.mainClass="examples.run.PojoApplicationWithSpring"`
+** `mvn exec:java -Dexec.mainClass="examples.run.PojoApplicationWithSpring2"`
