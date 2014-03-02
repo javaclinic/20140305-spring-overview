@@ -8,19 +8,19 @@ import examples.dao.PersistenceHelper;
 import examples.dao.PersistentStore;
 import examples.services.AccountManager;
 
-public class NoSpringFactory {
+public class NoSpringBeanFactory {
 	
-	private static final Logger LOGGER = Logger.getLogger(NoSpringFactory.class.getCanonicalName());
+	private static final Logger LOGGER = Logger.getLogger(NoSpringBeanFactory.class.getCanonicalName());
 
 	private static Map<String,Object> beans = new HashMap<>();
-	private static NoSpringFactory instance = new NoSpringFactory();
+	private static NoSpringBeanFactory instance = new NoSpringBeanFactory();
 	
-	private NoSpringFactory() {
-		LOGGER.info("Inside " + NoSpringFactory.class.getSimpleName() + "() default constructor. Instantiating configuration factory.");
+	private NoSpringBeanFactory() {
+		LOGGER.info("Inside " + NoSpringBeanFactory.class.getSimpleName() + "() default constructor. Instantiating configuration factory.");
 	}
 	
-	public static NoSpringFactory buildBeans() {
-		LOGGER.info("Inside " + NoSpringFactory.class.getSimpleName() + ".buildBeans() initialization method. Instantiating beans.");
+	public static NoSpringBeanFactory buildBeans() {
+		LOGGER.info("Inside " + NoSpringBeanFactory.class.getSimpleName() + ".buildBeans() initialization method. Instantiating beans.");
 
 		AccountManager service = new AccountManager();
 		PersistenceHelper helper = new PersistenceHelper();
@@ -37,12 +37,12 @@ public class NoSpringFactory {
 	}
 	
 	public Object getBean(String name) {
-		LOGGER.info("Inside " + NoSpringFactory.class.getSimpleName() + ".getBean() service method. Getting a bean.");
+		LOGGER.info("Inside " + NoSpringBeanFactory.class.getSimpleName() + ".getBean() service method. Getting a bean.");
 		return beans.get(name);
 	}
 
 	public <T> T getBean(String name, Class clazz) {
-		LOGGER.info("Inside " + NoSpringFactory.class.getSimpleName() + ".getBean() service method. Getting a bean.");
+		LOGGER.info("Inside " + NoSpringBeanFactory.class.getSimpleName() + ".getBean() service method. Getting a bean.");
 		Object bean = beans.get(name);
 		return (T) clazz.cast(bean);
 	}

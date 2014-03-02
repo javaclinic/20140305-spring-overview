@@ -1,13 +1,13 @@
 package examples.run;
 
-import examples.config.NoSpringFactory;
+import examples.config.NoSpringBeanFactory;
 import examples.services.AccountManager;
 
 public class PojoApplicationNoSpring {
 
 	public static void main(String[] args) {
 		
-		NoSpringFactory factory = NoSpringFactory.buildBeans();
+		NoSpringBeanFactory factory = NoSpringBeanFactory.buildBeans();
 		
 		AccountManager service = factory.getBean("accountManager", AccountManager.class);
 		

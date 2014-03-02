@@ -1,6 +1,6 @@
 package examples.run;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import examples.services.AccountManager;
@@ -9,7 +9,7 @@ public class PojoApplicationWithSpring {
 
 	public static void main(String[] args) {
 		
-		ApplicationContext factory = new ClassPathXmlApplicationContext("applicationContext.xml");
+		BeanFactory factory = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
 		AccountManager service = factory.getBean("accountManager", AccountManager.class);
 		
