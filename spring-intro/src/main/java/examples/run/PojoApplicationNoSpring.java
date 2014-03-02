@@ -3,7 +3,7 @@ package examples.run;
 import examples.config.NoSpringFactory;
 import examples.services.AccountManager;
 
-public class PojoApplication {
+public class PojoApplicationNoSpring {
 
 	public static void main(String[] args) {
 		
