@@ -1,10 +1,23 @@
-.metadata
 
-target/
-bin/
-
+*target*
 *.class
 *.jar
 *.war
 *.ear
+
+
+.metadata 
+bin/**
+tmp/**
+tmp/**/* 
+*.tmp
+*.swp
+*.bak
+
+# .settings/
+# .project
+# .classpath
+# .loadpath
+
+*.launch
 
