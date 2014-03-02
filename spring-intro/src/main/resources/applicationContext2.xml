@@ -1,0 +1,19 @@
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    "
+>
+
+    <bean id="accountManager" class="examples.services.AccountManager" autowire="byType" />
+
+    <bean id="persistenceHelper" class="examples.dao.PersistenceHelper" autowire="byType" />
+
+    <bean id="persistentStore" class="examples.dao.PersistentStore" />
+
+</beans>
