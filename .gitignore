@@ -1,0 +1,10 @@
+.metadata
+
+target/
+bin/
+
+*.class
+*.jar
+*.war
+*.ear
+
