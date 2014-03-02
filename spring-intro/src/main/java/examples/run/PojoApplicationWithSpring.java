@@ -1,16 +1,15 @@
 package examples.run;
 
-import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import examples.config.NoSpringFactory;
 import examples.services.AccountManager;
 
 public class PojoApplicationWithSpring {
 
 	public static void main(String[] args) {
 		
-		BeanFactory factory = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext factory = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
 		AccountManager service = factory.getBean("accountManager", AccountManager.class);
 		
@@ -18,6 +17,8 @@ public class PojoApplicationWithSpring {
 		service.addAccount("0000-0002", "John Doe", 2000.0);
 		service.addAccount("0000-0003", "Jane Doe", 3000.0);
 		service.addAccount("0000-0004", "Jill Doe", 4000.0);
+		
+		System.out.println("Number of accounts: " + service.getAccountCount());
 			
 	}
 
