@@ -14,6 +14,9 @@
     <spring.framework.version>3.2.3.RELEASE</spring.framework.version>
     <hsqldb.version>2.3.2</hsqldb.version>
     <tomcat.dbcp.version>7.0.52</tomcat.dbcp.version>
+    <junit.version>4.11</junit.version>
+    <mockito.version>1.9.5</mockito.version>
+    <powermock.version>1.5.4</powermock.version>
   </properties>
   
   <dependencies>
@@ -46,8 +49,37 @@
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jdbc</artifactId>
       <version>${tomcat.dbcp.version}</version>
-   </dependency> 
+   </dependency>
+    <dependency>
+    	<groupId>junit</groupId>
+    	<artifactId>junit</artifactId>
+    	<version>${junit.version}</version>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>${mockito.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-core</artifactId>
+        <version>${powermock.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-module-junit4</artifactId>
+        <version>${powermock.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-api-mockito</artifactId>
+        <version>${powermock.version}</version>
+        <scope>test</scope>
+    </dependency>
   </dependencies>
 
-  
 </project>
