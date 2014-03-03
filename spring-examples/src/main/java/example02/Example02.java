@@ -9,6 +9,7 @@ public class Example02 {
 
 	public static void main(String[] args) {
 
+		@SuppressWarnings("resource")
 		BeanFactory factory = new ClassPathXmlApplicationContext("example02/example02.xml");
 		
 		EmployeeService service = factory.getBean("service", EmployeeService.class);

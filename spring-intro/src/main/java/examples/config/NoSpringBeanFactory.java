@@ -41,7 +41,7 @@ public class NoSpringBeanFactory {
 		return beans.get(name);
 	}
 
-	public <T> T getBean(String name, Class clazz) {
+	public <T> T getBean(String name, Class<T> clazz) {
 		LOGGER.info("Inside " + NoSpringBeanFactory.class.getSimpleName() + ".getBean() service method. Getting a bean.");
 		Object bean = beans.get(name);
 		return (T) clazz.cast(bean);

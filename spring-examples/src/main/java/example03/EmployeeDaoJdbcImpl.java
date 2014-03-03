@@ -46,6 +46,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 			ps.setString(2, e.getName());
 			ps.setString(3, e.getEmail());
 			int updated = ps.executeUpdate();
+			LOGGER.info("  Updated records: " + updated);
 			
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

@@ -9,6 +9,7 @@ public class Example04 {
 
 	public static void main(String[] args) {
 
+		@SuppressWarnings("resource")
 		BeanFactory factory = new AnnotationConfigApplicationContext("example04");
 		
 		EmployeeService service = factory.getBean("service", EmployeeService.class);

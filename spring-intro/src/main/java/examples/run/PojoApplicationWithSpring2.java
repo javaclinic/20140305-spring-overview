@@ -9,6 +9,7 @@ public class PojoApplicationWithSpring2 {
 
 	public static void main(String[] args) {
 		
+		@SuppressWarnings("resource")
 		BeanFactory factory = new ClassPathXmlApplicationContext("applicationContext2.xml");
 		
 		AccountManager service = factory.getBean("accountManager", AccountManager.class);
