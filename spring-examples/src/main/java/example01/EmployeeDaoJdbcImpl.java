@@ -6,19 +6,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
 public class EmployeeDaoJdbcImpl implements EmployeeDao {
 	
+	private static final Logger LOGGER = Logger.getLogger(EmployeeDaoJdbcImpl.class.getCanonicalName());
+
 	private DataSource datasource;
 	
+	public EmployeeDaoJdbcImpl() {
+		LOGGER.info("Inside " + EmployeeDaoJdbcImpl.class.getSimpleName() + "() default constructor. Instantiating dao.");
+	}
+	
 	public void setDatasource(DataSource datasource) {
+		LOGGER.info("Inside " + EmployeeDaoJdbcImpl.class.getSimpleName() + ".setDatasource() setter method. Injecting datasource.");
 		this.datasource = datasource;
 	}
 
 	public void saveEmployee(Employee e) {
-		
+		LOGGER.info("Inside " + EmployeeDaoJdbcImpl.class.getSimpleName() + ".saveEmployee() business method. Saving employee.");
 		Connection c = null;
 		PreparedStatement ps = null;
 		String sql = "INSERT INTO employees (id,name,email) VALUES (?,?,?)";
@@ -58,7 +66,9 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 	}
 
 	public Collection<Employee> findAllEmployees() {
-		
+
+		LOGGER.info("Inside " + EmployeeDaoJdbcImpl.class.getSimpleName() + ".findAllEmployees() business method. Fetching all employees.");
+
 		Connection c = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;

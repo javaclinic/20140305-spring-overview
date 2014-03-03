@@ -31,10 +31,9 @@ public class MyBeanFactory {
 
 		EmployeeDaoJdbcImpl dao = new EmployeeDaoJdbcImpl();
 		datasource = buildDatasource();
-		dao.setDatasource(datasource);
-		
 		this.initializeSchema("schema.sql");
 		this.initializeData("data.sql");
+		dao.setDatasource(datasource);
 		
 		beans.put("dao", dao);
 		beans.put("datasource", datasource);
@@ -52,7 +51,12 @@ public class MyBeanFactory {
 		return (T) clazz.cast(bean);
 	}
 	
+	
+	/*
+	 * Helper method to initialize datasource pool. Using Tomcat JDBC Pool and HSQLDB in-memory database.
+	 */
 	private DataSource buildDatasource() {
+		LOGGER.info("Inside " + MyBeanFactory.class.getSimpleName() + ".buildDatasource() helper method. Instantiating datasource (connection pool).");
 		org.apache.tomcat.jdbc.pool.DataSource ds = new org.apache.tomcat.jdbc.pool.DataSource();
 		ds.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");
 		ds.setUrl("jdbc:hsqldb:mem:mydb");
@@ -60,9 +64,14 @@ public class MyBeanFactory {
 		ds.setPassword("");
 		return ds;
 	}
-	
+
+	/*
+	 * Helper method to initialize schema. Using HSQLDB SqlFile to run SQL files.
+	 */
 	private void initializeSchema(String filename) {
-		
+
+		LOGGER.info("Inside " + MyBeanFactory.class.getSimpleName() + ".initializeSchema() helper method. Initializing schema from a file.");
+
 		Connection c = null;
 		
 		try {
@@ -86,8 +95,13 @@ public class MyBeanFactory {
 		
 	}
 	
+	/*
+	 * Helper method to initialize data. Using HSQLDB SqlFile to run SQL files.
+	 */
 	private void initializeData(String filename) {
 		
+		LOGGER.info("Inside " + MyBeanFactory.class.getSimpleName() + ".initializeData() helper method. Initializing seed data from a file.");
+
 		Connection c = null;
 		
 		try {
