@@ -1,0 +1,35 @@
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+    "
+>
+
+    <bean id="dao" class="example02.EmployeeDaoJdbcImpl">
+        <property name="datasource" ref="datasource" />
+    </bean>
+
+    <bean id="dao2" class="example02.EmployeeDaoMemoryImpl" />
+
+    <!-- new in Spring3, can use in-memory embedded database with schema and data init scripts -->
+    <jdbc:embedded-database id="datasource" type="HSQL">
+        <jdbc:script location="classpath:schema.sql"/>
+        <jdbc:script location="classpath:data.sql"/>
+    </jdbc:embedded-database>
+    
+    <!-- traditional datasource implementation (comes with new Tomcat) -->
+    <bean id="oldDatasource" class="org.apache.tomcat.jdbc.pool.DataSource">
+        <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver" />
+        <property name="url" value="jdbc:hsqldb:mem:mydb" />
+        <property name="username" value="sa" />
+        <property name="password" value="" />
+    </bean>
+    
+</beans>

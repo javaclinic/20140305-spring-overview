@@ -2,5 +2,6 @@
 
 * This projects goes further into Spring examples
 * `example01` - No Spring example, using SqlTool to initialize schema and seed data.
+* `example02` - Spring example, using jdbc-embedded database
 * ...
 
