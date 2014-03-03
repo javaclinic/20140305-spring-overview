@@ -12,6 +12,10 @@
     "
 >
 
+    <bean id="service" class="example02.EmployeeServiceImpl">
+        <constructor-arg ref="dao" />
+    </bean>
+
     <bean id="dao" class="example02.EmployeeDaoJdbcImpl">
         <property name="datasource" ref="datasource" />
     </bean>

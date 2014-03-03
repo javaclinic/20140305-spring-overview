@@ -39,9 +39,13 @@ public class MyBeanFactory {
 		// In-memory implementation of EmployeeDao (not used)
 		EmployeeDaoMemoryImpl dao2 = new EmployeeDaoMemoryImpl();
 		
+		// EmployeeService
+		EmployeeService service = new EmployeeServiceImpl(dao);
+		
 		// register all beans with the MyBeanFactory
 		beans.put("dao", dao);
 		beans.put("dao2", dao2);
+		beans.put("service", service);
 		beans.put("datasource", datasource);
 	
 	}
