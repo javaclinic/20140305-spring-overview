@@ -4,5 +4,6 @@
 * `example01` - No Spring example, using SqlTool to initialize schema and seed data.
 * `example02` - Spring example, using jdbc-embedded database
 * `example03` - Spring example, using annotations and automatic scan
+* `example04` - Spring example, using annotations, scan and configuration (no XML)
 * ...
 
