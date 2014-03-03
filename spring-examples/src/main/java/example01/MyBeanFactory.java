@@ -29,13 +29,19 @@ public class MyBeanFactory {
 	public void buildBeans() {
 		LOGGER.info("Inside " + MyBeanFactory.class.getSimpleName() + ".buildBeans() initialization method. Instantiating beans.");
 
+		// JDBC implemntation of EmployeeDao
 		EmployeeDaoJdbcImpl dao = new EmployeeDaoJdbcImpl();
 		datasource = buildDatasource();
 		this.initializeSchema("schema.sql");
 		this.initializeData("data.sql");
 		dao.setDatasource(datasource);
 		
+		// In-memory implementation of EmployeeDao (not used)
+		EmployeeDaoMemoryImpl dao2 = new EmployeeDaoMemoryImpl();
+		
+		// register all beans with the MyBeanFactory
 		beans.put("dao", dao);
+		beans.put("dao2", dao2);
 		beans.put("datasource", datasource);
 	
 	}
