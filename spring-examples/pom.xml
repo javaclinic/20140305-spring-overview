@@ -10,22 +10,39 @@
   <version>0.0.1-SNAPSHOT</version>
   <description>Spring Examples</description>
   
+  <properties>
+    <spring.framework.version>3.2.3.RELEASE</spring.framework.version>
+    <hsqldb.version>2.3.2</hsqldb.version>
+    <tomcat.dbcp.version>7.0.52</tomcat.dbcp.version>
+  </properties>
   
   <dependencies>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
+      <version>${spring.framework.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
+      <version>${spring.framework.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>${hsqldb.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>sqltool</artifactId>
+      <version>${hsqldb.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-jdbc</artifactId>
+      <version>${tomcat.dbcp.version}</version>
+   </dependency> 
   </dependencies>
 
-  <properties>
-    <spring.version>3.2.3.RELEASE</spring.version>
-  </properties>
   
 </project>
