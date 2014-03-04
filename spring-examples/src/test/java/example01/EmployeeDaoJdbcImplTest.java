@@ -1,5 +1,7 @@
 package example01;
 
+import static org.junit.Assert.assertEquals;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -97,31 +99,46 @@ public class EmployeeDaoJdbcImplTest {
 	@Ignore("Test not implemented yet.")
 	@Test
 	public void testFindAllEmployees() {
-		throw new RuntimeException("Not implemented.");
 	}
 	
-	@Ignore("Test not implemented yet.")
 	@Test
 	public void testFindEmployeeByName() {
-		throw new RuntimeException("Not implemented.");
+		try {
+			EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
+			testObject.findEmployeesByName("J*");
+		} catch (RuntimeException re) {
+			assertEquals("Not implemented.", re.getMessage());
+		}
 	}
 	
-	@Ignore("Test not implemented yet.")
 	@Test
 	public void testDeleteEmployee() {
-		throw new RuntimeException("Not implemented.");
+		try {
+			EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
+			testObject.deleteEmployee(new Employee());
+		} catch (RuntimeException re) {
+			assertEquals("Not implemented.", re.getMessage());
+		}
 	}
 
-	@Ignore("Test not implemented yet.")
 	@Test
 	public void testUpdateEmployee() {
-		throw new RuntimeException("Not implemented.");
+		try {
+			EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
+			testObject.updateEmployee(new Employee());
+		} catch (RuntimeException re) {
+			assertEquals("Not implemented.", re.getMessage());
+		}
 	}
 
-	@Ignore("Test not implemented yet.")
 	@Test
 	public void testFindEmployeeById() {
-		throw new RuntimeException("Not implemented.");
+		try {
+			EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
+			testObject.findEmployeeById("0001");
+		} catch (RuntimeException re) {
+			assertEquals("Not implemented.", re.getMessage());
+		}
 	}
 	
 }
