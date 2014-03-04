@@ -88,7 +88,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 			c = datasource.getConnection();
 			ps = c.prepareStatement(sql);
 			rs = ps.executeQuery();
-			
+						
 			while (rs.next()) {
 				Employee employee = new Employee();
 				employee.setId(rs.getString("id"));
@@ -96,14 +96,15 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 				employee.setEmail(rs.getString("email"));
 				result.add(employee);
 			}
+			return result;
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
+			return result;
 		} finally {
 			if ( rs != null ) try { rs.close(); } catch (SQLException ex) { ex.printStackTrace(); }
 			if ( ps != null ) try { ps.close(); } catch (SQLException ex) { ex.printStackTrace(); }
 			if ( c != null ) try { c.close(); } catch (SQLException ex) { ex.printStackTrace(); }
 		}
-		return result;		
 	}
 
 }
