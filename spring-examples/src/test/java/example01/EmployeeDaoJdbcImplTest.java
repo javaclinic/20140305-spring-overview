@@ -1,12 +1,15 @@
 package example01;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -15,7 +18,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -26,7 +28,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PrepareForTest(DataSource.class)
 public class EmployeeDaoJdbcImplTest {
 		
-	private static Collection<Employee> testData;
+	private static List<Employee> testData;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -88,7 +90,7 @@ public class EmployeeDaoJdbcImplTest {
 			Mockito.verify(connection).close();
 			
 		} catch (SQLException sqle) {
-			Assert.fail("Should not throw the exception." + sqle.getMessage());
+			fail("Should not throw the exception." + sqle.getMessage());
 		}
 		Mockito.verifyNoMoreInteractions(ps);
 		Mockito.verifyNoMoreInteractions(connection);
@@ -96,9 +98,53 @@ public class EmployeeDaoJdbcImplTest {
 		
 	}
 	
-	@Ignore("Test not implemented yet.")
 	@Test
 	public void testFindAllEmployees() {
+		
+		DataSource datasource = Mockito.mock(DataSource.class);
+		Connection connection = Mockito.mock(Connection.class);
+		PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+		ResultSet rs = Mockito.mock(ResultSet.class);
+
+		String sql = "SELECT id,name,email FROM employees";
+
+		EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
+		testObject.setDatasource(datasource);
+		
+		try {
+			
+			Mockito.doReturn(connection).when(datasource).getConnection();
+			Mockito.doReturn(ps).when(connection).prepareStatement(sql);
+			Mockito.doReturn(rs).when(ps).executeQuery();
+			
+			Mockito.when(rs.next()).thenReturn(true, true, true, true, true, false);
+			Mockito.when(rs.getString("id")).thenReturn("0001", "0002", "0003", "0004", "0005");
+			Mockito.when(rs.getString("name")).thenReturn("John Doe", "Jane Doe", "Jack Doe", "Jill Doe", "Jenn Doe");
+			Mockito.when(rs.getString("email")).thenReturn("john@email.com", "jane@email.com", "jack@email.com", "jill@email.com", "jenn@email.com");
+			
+			Collection<Employee> result = testObject.findAllEmployees();
+			assertEquals(5, result.size());
+			
+			Mockito.verify(datasource).getConnection();
+			Mockito.verify(connection).prepareStatement(sql);
+			Mockito.verify(ps).executeQuery();
+			Mockito.verify(rs, Mockito.times(6)).next();
+			Mockito.verify(rs, Mockito.times(5)).getString("id");
+			Mockito.verify(rs, Mockito.times(5)).getString("name");
+			Mockito.verify(rs, Mockito.times(5)).getString("email");
+			Mockito.verify(rs).close();
+			Mockito.verify(ps).close();
+			Mockito.verify(connection).close();
+			
+		} catch (SQLException sqle) {
+			fail("Should not throw the exception." + sqle.getMessage());
+		}
+		
+		Mockito.verifyNoMoreInteractions(rs);
+		Mockito.verifyNoMoreInteractions(ps);
+		Mockito.verifyNoMoreInteractions(connection);
+		Mockito.verifyNoMoreInteractions(datasource);
+		
 	}
 	
 	@Test
@@ -106,6 +152,7 @@ public class EmployeeDaoJdbcImplTest {
 		try {
 			EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
 			testObject.findEmployeesByName("J*");
+			fail("Should have thrown a runtime exception.");
 		} catch (RuntimeException re) {
 			assertEquals("Not implemented.", re.getMessage());
 		}
@@ -116,6 +163,7 @@ public class EmployeeDaoJdbcImplTest {
 		try {
 			EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
 			testObject.deleteEmployee(new Employee());
+			fail("Should have thrown a runtime exception.");
 		} catch (RuntimeException re) {
 			assertEquals("Not implemented.", re.getMessage());
 		}
@@ -126,6 +174,7 @@ public class EmployeeDaoJdbcImplTest {
 		try {
 			EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
 			testObject.updateEmployee(new Employee());
+			fail("Should have thrown a runtime exception.");
 		} catch (RuntimeException re) {
 			assertEquals("Not implemented.", re.getMessage());
 		}
@@ -136,6 +185,7 @@ public class EmployeeDaoJdbcImplTest {
 		try {
 			EmployeeDaoJdbcImpl testObject = new EmployeeDaoJdbcImpl();
 			testObject.findEmployeeById("0001");
+			fail("Should have thrown a runtime exception.");
 		} catch (RuntimeException re) {
 			assertEquals("Not implemented.", re.getMessage());
 		}
