@@ -1,9 +1,10 @@
 package example01;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -33,74 +34,56 @@ public class EmployeeDaoMemoryImplTest {
 		testObject = null;
 	}
 
-	/**
-	 * Test method for {@link example01.EmployeeDaoMemoryImpl#saveEmployee(example01.Employee)}.
-	 */
 	@Test
 	public void testSaveEmployee() {
-		try {
-			Employee e1 = new Employee("0006", "Jeff Doe", "jeff@email.com");
-			Employee e2 = new Employee("0007", "Jean Doe", "jean@email.com");
-			testObject.saveEmployee(e1);
-			assertEquals(6, testObject.findAllEmployees().size());
-			testObject.saveEmployee(e2);
-			assertEquals(7, testObject.findAllEmployees().size());
-		} catch (RuntimeException re) {
-			fail("Should not catch any runtime exceptions: " + re.getMessage());
-		}
+		Employee e1 = new Employee("0006", "Jeff Doe", "jeff@email.com");
+		Employee e2 = new Employee("0007", "Jean Doe", "jean@email.com");
+		testObject.saveEmployee(e1);
+		assertEquals(6, testObject.findAllEmployees().size());
+		testObject.saveEmployee(e2);
+		assertEquals(7, testObject.findAllEmployees().size());
 	}
 
-	/**
-	 * Test method for {@link example01.EmployeeDaoMemoryImpl#deleteEmployee(example01.Employee)}.
-	 */
 	@Test
 	public void testDeleteEmployee() {
-		try {
-			testObject.deleteEmployee(new Employee());
-		} catch (RuntimeException re) {
-			assertEquals("Not implemented.", re.getMessage());
-		}
+		testObject.deleteEmployee(new Employee());
+		Employee e1 = new Employee("0006", "Jeff Doe", "jeff@email.com");
+		testObject.saveEmployee(e1);
+		assertEquals(6, testObject.findAllEmployees().size());
+		testObject.deleteEmployee(e1);
+		assertEquals(5, testObject.findAllEmployees().size());
 	}
 
-	/**
-	 * Test method for {@link example01.EmployeeDaoMemoryImpl#updateEmployee(example01.Employee)}.
-	 */
 	@Test
 	public void testUpdateEmployee() {
-		try {
-			testObject.updateEmployee(new Employee());
-		} catch (RuntimeException re) {
-			assertEquals("Not implemented.", re.getMessage());
-		}
+		Employee e1 = testObject.findEmployeeById("0001");
+		e1.setName("John Doe Jr.");
+		e1.setEmail("john.jr@email.com");
+		testObject.updateEmployee(e1);
+		Employee e2 = testObject.findEmployeeById("0001");
+		assertEquals("0001", e2.getId());
+		assertEquals("John Doe Jr.", e2.getName());
+		assertEquals("john.jr@email.com", e2.getEmail());
 	}
 
-	/**
-	 * Test method for {@link example01.EmployeeDaoMemoryImpl#findEmployeeById(java.lang.String)}.
-	 */
 	@Test
-	public void testFindEmployeeById() {
-		try {
-			testObject.findEmployeeById("0001");
-		} catch (RuntimeException re) {
-			assertEquals("Not implemented.", re.getMessage());
-		}
+	public void testFindEmployeeById() {	
+		Employee e1 = testObject.findEmployeeById("0001");
+		assertNotNull(e1);
+		assertEquals("0001", e1.getId());
+		assertEquals("John Doe", e1.getName());
+		assertEquals("john@email.com", e1.getEmail());
 	}
 
-	/**
-	 * Test method for {@link example01.EmployeeDaoMemoryImpl#findEmployeesByName(java.lang.String)}.
-	 */
 	@Test
 	public void testFindEmployeesByName() {
-		try {
-			testObject.findEmployeesByName("J*");
-		} catch (RuntimeException re) {
-			assertEquals("Not implemented.", re.getMessage());
+		Collection<Employee> result = testObject.findEmployeesByName("Ja.*");
+		assertEquals(2,result.size());
+		for (Employee e : result) {
+			assertEquals(true, Pattern.matches("Ja.*", e.getName()));
 		}
 	}
 
-	/**
-	 * Test method for {@link example01.EmployeeDaoMemoryImpl#findAllEmployees()}.
-	 */
 	@Test
 	public void testFindAllEmployees() {
 		Collection<Employee> result = testObject.findAllEmployees();
