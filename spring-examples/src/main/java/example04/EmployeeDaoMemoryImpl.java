@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Repository;
 
@@ -30,19 +31,27 @@ public class EmployeeDaoMemoryImpl implements EmployeeDao {
 	}
 
 	public void deleteEmployee(Employee e) {
-		throw new RuntimeException("Not implemented.");
+		LOGGER.info("Inside " + EmployeeDaoMemoryImpl.class.getSimpleName() + ".findEmployeeById() business method. Fetching an employees.");
+		database.remove(e.getId());
 	}
 
 	public void updateEmployee(Employee e) {
-		throw new RuntimeException("Not implemented.");
+		LOGGER.info("Inside " + EmployeeDaoMemoryImpl.class.getSimpleName() + ".findEmployeeById() business method. Fetching an employees.");
+		database.put(e.getId(), e);
 	}
 
 	public Employee findEmployeeById(String id) {
-		throw new RuntimeException("Not implemented.");
+		LOGGER.info("Inside " + EmployeeDaoMemoryImpl.class.getSimpleName() + ".findEmployeeById() business method. Fetching an employees.");
+		return database.get(id);
 	}
 
 	public Collection<Employee> findEmployeesByName(String query) {
-		throw new RuntimeException("Not implemented.");
+		LOGGER.info("Inside " + EmployeeDaoMemoryImpl.class.getSimpleName() + ".findEmployeesByName() business method. Fetching selected employees.");
+		List<Employee> result = new ArrayList<>();
+		for (Employee e : database.values()) {
+			if ( Pattern.matches(query, e.getName())) { result.add(e); }
+		}
+		return result;
 	}
 
 	public Collection<Employee> findAllEmployees() {

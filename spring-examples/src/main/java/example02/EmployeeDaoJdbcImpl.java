@@ -25,6 +25,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 		this.datasource = datasource;
 	}
 
+	@Override
 	public void saveEmployee(Employee e) {
 		LOGGER.info("Inside " + EmployeeDaoJdbcImpl.class.getSimpleName() + ".saveEmployee() business method. Saving employee.");
 		Connection c = null;
@@ -50,22 +51,27 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 		
 	}
 
+	@Override
 	public void deleteEmployee(Employee e) {
 		throw new RuntimeException("Not implemented.");
 	}
 
+	@Override
 	public void updateEmployee(Employee e) {
 		throw new RuntimeException("Not implemented.");
 	}
 
+	@Override
 	public Employee findEmployeeById(String id) {
 		throw new RuntimeException("Not implemented.");
 	}
-
+	
+	@Override
 	public Collection<Employee> findEmployeesByName(String query) {
 		throw new RuntimeException("Not implemented.");
 	}
 
+	@Override
 	public Collection<Employee> findAllEmployees() {
 
 		LOGGER.info("Inside " + EmployeeDaoJdbcImpl.class.getSimpleName() + ".findAllEmployees() business method. Fetching all employees.");
@@ -82,7 +88,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 			c = datasource.getConnection();
 			ps = c.prepareStatement(sql);
 			rs = ps.executeQuery();
-			
+						
 			while (rs.next()) {
 				Employee employee = new Employee();
 				employee.setId(rs.getString("id"));
@@ -90,14 +96,15 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 				employee.setEmail(rs.getString("email"));
 				result.add(employee);
 			}
+			return result;
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
+			return result;
 		} finally {
 			if ( rs != null ) try { rs.close(); } catch (SQLException ex) { ex.printStackTrace(); }
 			if ( ps != null ) try { ps.close(); } catch (SQLException ex) { ex.printStackTrace(); }
 			if ( c != null ) try { c.close(); } catch (SQLException ex) { ex.printStackTrace(); }
 		}
-		return result;		
 	}
 
 }

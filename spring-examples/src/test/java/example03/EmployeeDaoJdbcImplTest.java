@@ -1,4 +1,4 @@
-package example01;
+package example03;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
