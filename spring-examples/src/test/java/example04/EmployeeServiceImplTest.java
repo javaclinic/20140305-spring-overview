@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -47,7 +46,7 @@ public class EmployeeServiceImplTest {
 
 	@Test
 	public void testSaveEmployee() {
-		EmployeeDaoJdbcImpl dao = PowerMockito.mock(EmployeeDaoJdbcImpl.class);
+		EmployeeDaoJdbcImpl dao = Mockito.mock(EmployeeDaoJdbcImpl.class);
 		EmployeeService testObject = new EmployeeServiceImpl(dao);
 		Mockito.doNothing().when(dao).saveEmployee(Mockito.any(Employee.class));
 		testObject.saveEmployee("0006", "Jeff Doe", "jeff@email.com");
@@ -57,7 +56,7 @@ public class EmployeeServiceImplTest {
 
 	@Test
 	public void testGetAllEmployees() {
-		EmployeeDao dao = PowerMockito.mock(EmployeeDaoJdbcImpl.class);
+		EmployeeDao dao = Mockito.mock(EmployeeDaoJdbcImpl.class);
 		EmployeeService testObject = new EmployeeServiceImpl(dao);
 		Mockito.doReturn(testData).when(dao).findAllEmployees();
 		Collection<Employee> result = testObject.getAllEmployees();
@@ -69,7 +68,7 @@ public class EmployeeServiceImplTest {
 	
 	@Test
 	public void testCountEmployees() {
-		EmployeeDao dao = PowerMockito.mock(EmployeeDaoJdbcImpl.class);
+		EmployeeDao dao = Mockito.mock(EmployeeDaoJdbcImpl.class);
 		EmployeeService testObject = new EmployeeServiceImpl(dao);
 		Mockito.doReturn(testData).when(dao).findAllEmployees();
 		int result = testObject.countEmployees();
