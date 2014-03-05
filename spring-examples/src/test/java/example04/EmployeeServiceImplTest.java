@@ -49,7 +49,7 @@ public class EmployeeServiceImplTest {
 	public void testSaveEmployee() {
 		EmployeeDaoJdbcImpl dao = PowerMockito.mock(EmployeeDaoJdbcImpl.class);
 		EmployeeService testObject = new EmployeeServiceImpl(dao);
-		PowerMockito.doNothing().when(dao).saveEmployee(Mockito.any(Employee.class));
+		Mockito.doNothing().when(dao).saveEmployee(Mockito.any(Employee.class));
 		testObject.saveEmployee("0006", "Jeff Doe", "jeff@email.com");
 		Mockito.verify(dao).saveEmployee(Mockito.any(Employee.class));
 		Mockito.verifyNoMoreInteractions(dao);
@@ -59,7 +59,7 @@ public class EmployeeServiceImplTest {
 	public void testGetAllEmployees() {
 		EmployeeDao dao = PowerMockito.mock(EmployeeDaoJdbcImpl.class);
 		EmployeeService testObject = new EmployeeServiceImpl(dao);
-		PowerMockito.doReturn(testData).when(dao).findAllEmployees();
+		Mockito.doReturn(testData).when(dao).findAllEmployees();
 		Collection<Employee> result = testObject.getAllEmployees();
 		Assert.assertEquals(5, result.size());
 		Mockito.verify(dao).findAllEmployees();
@@ -71,7 +71,7 @@ public class EmployeeServiceImplTest {
 	public void testCountEmployees() {
 		EmployeeDao dao = PowerMockito.mock(EmployeeDaoJdbcImpl.class);
 		EmployeeService testObject = new EmployeeServiceImpl(dao);
-		PowerMockito.doReturn(testData).when(dao).findAllEmployees();
+		Mockito.doReturn(testData).when(dao).findAllEmployees();
 		int result = testObject.countEmployees();
 		Assert.assertEquals(5, result);
 		Mockito.verify(dao).findAllEmployees();
